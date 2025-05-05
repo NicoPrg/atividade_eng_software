@@ -23,13 +23,13 @@ Route::get('/funcionariosrec' , function () {
 });
 
 //busca por id de funcionário
-Route::get('/funcionariosrec/{id}' , function ($id) {
+Route::get('/funcionariosbusca/{id}' , function ($id) {
     $funcionario = Funcionario::find($id);
     return response()->json($funcionario);
 });
 
 //alterar funcionário
-Route::patch('/funcionario/{id}', function (Request $request, $id) {
+Route::patch('/funcionarioalter/{id}', function (Request $request, $id) {
     $funcionario = Funcionario::find($id);
     if($request->input('nome') !== null){
         $funcionario->nome = $request->input('nome');
@@ -41,7 +41,7 @@ Route::patch('/funcionario/{id}', function (Request $request, $id) {
 });
 
 //deletar funcionário
-Route::delete('/funcionario/{id}' , function ($id) {
+Route::delete('/funcionariodel/{id}' , function ($id) {
     $funcionario = Funcionario::find($id);
     $funcionario->delete();
     return response()->json($funcionario);
@@ -65,13 +65,13 @@ Route::get('/departamentosrec' , function () {
 });
 
 //busca por id de departamento
-Route::get('/departamentosrec/{id}' , function ($id) {
+Route::get('/departamentosbusca/{id}' , function ($id) {
     $departamento = Departamento::find($id);
     return response()->json($departamento);
 });
 
 //alterar departamento
-Route::patch('/departamento/{id}', function (Request $request, $id) {
+Route::patch('/departamentoalter/{id}', function (Request $request, $id) {
     $departamento = Departamento::find($id);
     if($request->input('nome') !== null){
     $departamento->nome = $request->input('nome');
@@ -80,7 +80,7 @@ Route::patch('/departamento/{id}', function (Request $request, $id) {
 
 
 //deletar departamento
-Route::delete('/departamento/{id}' , function ($id) {
+Route::delete('/departamentodel/{id}' , function ($id) {
     $departamento = Departamento::find($id);
     $departamento->delete();
     return response()->json($departamento);
@@ -97,7 +97,7 @@ Route::get('/lista_funcionarios/departamentos' , function () {
 
 //listar departamentos com seus funfionários
 Route::get('/lista_departamentos/funcionarios' , function () {
-    $departamento = Departamento::with('funcionario')->get();
+    $departamento = Departamento::with('funcionarios')->get();
     return response()->json($departamento);
    });
 
